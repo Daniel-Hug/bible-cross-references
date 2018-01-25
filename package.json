@@ -1,0 +1,11 @@
+{
+  "name": "bible-cross-references",
+  "version": "1.0.0",
+  "main": "index.html",
+  "repository": "https://github.com/Daniel-Hug/bible-cross-references",
+  "author": "Daniel Hug",
+  "license": "MIT",
+  "dependencies": {
+    "bible-passage-reference-parser": "^2.0.1"
+  }
+}
