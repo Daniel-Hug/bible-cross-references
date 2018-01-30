@@ -117,6 +117,7 @@ function displayResults(crossReferenceDataByTarget) {
 	})/*.filter(function(crossReference) {
 		return crossReference.referenceCount >= 2;
 	})*/;
+	crossReferences = condenseWithRanges(crossReferences);
 	crossReferences = sortBy(crossReferences, 'popularity', 'descending');
 	crossReferences = sortBy(crossReferences, 'referenceCount', 'descending');
 
@@ -196,6 +197,44 @@ var expandOsis = (function() {
 })();
 
 
+var condenseWithRanges = (function() {
+	var bcv = new bcv_parser;
+	bcv.set_options({"osis_compaction_strategy": "bcv"});
+
+	return function condenseWithRanges(crossReferences) {
+		// sort crossReferences into arrays within uniqueArrays such
+		// that the referenceCount and popularity properties of each
+		// cross reference object in any given array are identical
+		var indexByKey = {};
+		var uniqueArrays = [];
+		crossReferences.forEach(function(crossReference) {
+			var key = crossReference.referenceCount + ' ' + crossReference.popularity;
+			var index = indexByKey[key] || uniqueArrays.length;
+			indexByKey[key] = index;
+			if (uniqueArrays[index] === undefined) uniqueArrays[index] = [];
+			uniqueArrays[index].push(crossReference);
+		});
+
+		// condense each array by combining individual verses into ranges where possible
+		var condensed = [];
+		uniqueArrays.forEach(function(crossReferences) {
+			var references = crossReferences.map(function(crossReference) {
+				return crossReference.reference;
+			});
+			var condensedRefs = bcv.parse(references.join(',')).osis().split(',');
+			var newObjects = condensedRefs.map(function(ref) {
+				var firstVerse = ref.split('-')[0];
+				var indexInUncondensed = references.indexOf(firstVerse);
+				var newObject = extend({}, crossReferences[indexInUncondensed]);
+				newObject.reference = ref;
+				return newObject;
+			});
+			[].push.apply(condensed, newObjects);
+		});
+
+		return condensed;
+	}
+})();
 
 
 // Reftagger

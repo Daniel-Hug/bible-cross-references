@@ -63,3 +63,12 @@ function sumArray(array) {
 	for (var i = 0, l = array.length; i < l; i++) sum += array[i];
 	return sum;
 }
+
+function extend(destination, source) {
+	for (var key in source) {
+		if (source.hasOwnProperty(key)) {
+			destination[key] = source[key];
+		}
+	}
+	return destination;
+}
