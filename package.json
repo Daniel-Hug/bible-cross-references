@@ -6,6 +6,10 @@
   "author": "Daniel Hug",
   "license": "MIT",
   "dependencies": {
-    "bible-passage-reference-parser": "^2.0.1"
+    "Bible-Reference-Formatter": "https://github.com/openbibleinfo/Bible-Reference-Formatter",
+    "DOM-Builder": "https://github.com/Daniel-Hug/DOM-Builder",
+    "bible-passage-reference-parser": "^2.0.1",
+    "stabort": "https://github.com/Daniel-Hug/stabort",
+    "verbalize": "https://github.com/Daniel-Hug/verbalize"
   }
 }

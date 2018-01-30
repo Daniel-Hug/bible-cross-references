@@ -1,0 +1,19 @@
+{
+  "name": "verbalize",
+  "main": "verbalize.js",
+  "authors": [
+    "Daniel Hug"
+  ],
+  "description": "A set of tiny utility functions for converting data into human-readable text",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "text",
+    "english",
+    "string"
+  ],
+  "homepage": "https://github.com/Daniel-Hug/verbalize"
+}

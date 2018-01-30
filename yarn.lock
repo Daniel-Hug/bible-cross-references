@@ -2,6 +2,22 @@
 # yarn lockfile v1
 
 
+"Bible-Reference-Formatter@https://github.com/openbibleinfo/Bible-Reference-Formatter":
+  version "0.0.0"
+  resolved "https://github.com/openbibleinfo/Bible-Reference-Formatter#7777fd9af2b337d997c48cca5af01b249545d563"
+
+"DOM-Builder@https://github.com/Daniel-Hug/DOM-Builder":
+  version "0.0.0"
+  resolved "https://github.com/Daniel-Hug/DOM-Builder#4c1f639221d204facbec7ab1e9314dc6a2b2ea99"
+
 bible-passage-reference-parser@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/bible-passage-reference-parser/-/bible-passage-reference-parser-2.0.1.tgz#1f2339645a88c4a52bea45ae36b4745be539085b"
+
+"stabort@https://github.com/Daniel-Hug/stabort":
+  version "0.0.0"
+  resolved "https://github.com/Daniel-Hug/stabort#fa7230ca5cf49cd7e2ea483105ef1ef29bcae805"
+
+"verbalize@https://github.com/Daniel-Hug/verbalize":
+  version "0.0.0"
+  resolved "https://github.com/Daniel-Hug/verbalize#d95f1c64990e4f6e90b4aeec1c6d2c0d2bb4555a"

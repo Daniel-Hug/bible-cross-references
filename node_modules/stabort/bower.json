@@ -1,0 +1,7 @@
+{
+  "name": "stabort",
+  "main": "stabort.js",
+  "devDependencies": {
+    "jasmine": "~2.3.4"
+  }
+}

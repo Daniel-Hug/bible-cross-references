@@ -57,3 +57,9 @@ function prependAInB(newChild, parent) {
 function log() {
 	console.log('this: ', this, '\narguments: ', arguments);
 }
+
+function sumArray(array) {
+	var sum = 0;
+	for (var i = 0, l = array.length; i < l; i++) sum += array[i];
+	return sum;
+}

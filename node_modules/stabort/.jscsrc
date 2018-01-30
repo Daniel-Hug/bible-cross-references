@@ -1,0 +1,17 @@
+{
+	"disallowTrailingWhitespace": true,
+	"disallowMixedSpacesAndTabs": "smart",
+	"requireSpaceAfterKeywords": [
+		"if",
+		"else",
+		"for",
+		"while",
+		"do",
+		"switch",
+		"case",
+		"return",
+		"try",
+		"catch",
+		"typeof"
+	]
+}
