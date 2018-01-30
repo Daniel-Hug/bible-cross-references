@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Bible Cross References</title>
+	<title>Adavanced Bible cross reference search</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<h1>Find cross-references shared by a set of bible verses</h1>
 	<form id="reference-search-form">
 		<input type="search" name="references">
+		<button type="submit">Find related verses</button>
 	</form>
-	<h1>Cross references</h1>
 	<ol id="cross-references"></ol>
+	<p>The purpose of this tool is to facilitate your discovery of cross-references that share a common theme with Bible verses you already know. The cross reference data is from <a href="http://www.openbible.info/labs/cross-references/">OpenBible.info</a>.</p>
 
 	<script src="helpers.js"></script>
 	<script src="resources/bible-passage-reference-parser/js/en_bcv_parser.js"></script>

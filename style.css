@@ -2,3 +2,25 @@ body {
 	font-family: sans-serif;
 	line-height: 24px;
 }
+
+h1 {
+	line-height: 1.1em;
+}
+
+#reference-search-form {
+	overflow: hidden;
+	padding-left: 1px;
+}
+
+#reference-search-form input[type=search],
+#reference-search-form button[type=submit] {
+	height: 2.6em;
+	padding: 6px 12px;
+	display: block;
+	float: left;
+	margin-left: -1px;
+}
+
+#reference-search-form input[type=search] {
+	border: 1px solid #888;
+}
