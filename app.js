@@ -126,9 +126,11 @@ function displayResults(crossReferenceDataByTarget) {
 		kids: crossReferences.map(function(crossReference) {
 			return {
 				el: 'li',
-				text: osisToEn("esv-long", crossReference.reference) + ': ' +
-					vb.count(crossReference.referenceCount, 'reference') + ', ' +
+				kids: [
+					{ el: 'strong', text: osisToEn("esv-long", crossReference.reference) + ':' },
+					' ' + vb.count(crossReference.referenceCount, 'reference') + ', ' +
 					Math.round(crossReference.popularity * 100) + '% as popular as average'
+				]
 			};
 		})
 	});
