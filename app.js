@@ -22,7 +22,7 @@ var searchEngine = (function() {
 	var referencesQuery;
 
 	// load cross reference data
-	var crossReferenceFile = 'cross_references.txt';
+	var crossReferenceFile = 'cross_references.min.txt';
 	fetch(crossReferenceFile).then(response => response.text())
 	.then(processCrossReferenceFile)
 	.catch(function(error) {
@@ -74,23 +74,24 @@ var searchEngine = (function() {
 
 	function processCrossReferenceFile(text) {
 		// split on each new line
-		var lines = text.trim().split('\n').slice(1);
+		var lines = text.trim().split('\n');
 		lines.forEach(function(line) {
 
-			// split each line into 3: origin reference, target reference, and # votes
-			var parts = line.split('\t');
-			var originReference = parts[0];
-			var targetPassage = parts[1];
-			var voteCount = parseInt(parts[2], 10);
-
-			// store for easy lookup by origin reference
-			if (crossReferencesByOriginReference[originReference] === undefined) {
-				crossReferencesByOriginReference[originReference] = [];
-			}
-			crossReferencesByOriginReference[originReference].push({
-				targetPassage: targetPassage,
-				votes: voteCount
-			});
+			// Split on each comma: the first value is the origin
+			// reference. The rest are cross references with their
+			// reference and vote count separated by a space character
+			var commaSeparatedValues = line.split(',');
+			var originReference = commaSeparatedValues[0];
+			commaSeparatedValues.shift();
+			crossReferencesByOriginReference[originReference] =
+				commaSeparatedValues.map(function(crossReference) {
+					// split on each space
+					var spaceSeparatedValues = crossReference.split(' ');
+					return {
+						targetPassage: spaceSeparatedValues[0],
+						votes: parseInt(spaceSeparatedValues[1], 10)
+					};
+				});
 		});
 		crossReferencesReady = true;
 		if (referencesQuery) {
@@ -257,3 +258,36 @@ function initReftagger() {
   // call refTagger.tag() whenever references are added to page
 }
 initReftagger()
+
+function minifyCrossReferenceFile() {
+	// load cross reference data
+	var crossReferenceFile = 'cross_references.txt';
+	fetch(crossReferenceFile).then(response => response.text())
+	.then(minifyCrossReferences)
+	.catch(function(error) {
+	    console.error('Error fetching ' + crossReferenceFile + ':', error);
+	});
+
+	function minifyCrossReferences(text) {
+		var lastOriginRef;
+		// split on each new line
+		var lines = text.trim().split('\n').slice(1);
+		var newLines = [];
+		lines.forEach(function(line) {
+			// split each line into 3: origin reference, target reference, and # votes
+			var parts = line.split('\t');
+			var originReference = parts[0];
+			if (originReference !== lastOriginRef) {
+				newLines.push(originReference);
+				lastOriginRef = originReference;
+			}
+			var targetPassage = parts[1];
+			var voteCount = parseInt(parts[2], 10);
+			newLines[newLines.length - 1] += ',' + targetPassage + ' ' + voteCount;
+		});
+
+		window.crMin = newLines.join('\n');
+		console.log('Cross references minified. Copy with copy(crMin)');
+	}
+}
+console.log('Get new minified file with minifyCrossReferenceFile()');
