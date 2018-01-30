@@ -1,7 +1,7 @@
 {
   "nodeVersion": "v6.11.5",
   "modulesFolders": [
-    "node_modules"
+    "resources"
   ],
   "flags": [],
   "linkedModules": [],
