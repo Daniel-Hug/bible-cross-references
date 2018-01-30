@@ -17,7 +17,7 @@ on(referenceSearchForm, 'submit', instead(function() {
 
 // When a query and the cross reference data are ready, call processQuery()
 var searchEngine = (function() {
-	var crossReferencesByOriginReference = {};
+	window.crossReferencesByOriginReference = {};
 	var crossReferencesReady = false;
 	var referencesQuery;
 
@@ -74,7 +74,7 @@ var searchEngine = (function() {
 
 	function processCrossReferenceFile(text) {
 		// split on each new line
-		var lines = text.split('\n').slice(1);
+		var lines = text.trim().split('\n').slice(1);
 		lines.forEach(function(line) {
 
 			// split each line into 3: origin reference, target reference, and # votes
@@ -132,6 +132,7 @@ function displayResults(crossReferenceDataByTarget) {
 			};
 		})
 	});
+	refTagger.tag()
 }
 
 // Input a reference to a scripture passage in OSIS format e.g.: "2Co.6.14-2Co.7.1"
@@ -191,3 +192,27 @@ var expandOsis = (function() {
 
 	return expandOsis;
 })();
+
+
+
+
+// Reftagger
+function initReftagger() {
+  // config
+  window.refTagger = {
+      settings: {
+          noSearchClassNames: ['editor-content', 'navbar']
+      }
+  };
+
+  // create <script>
+  var refTaggerScript = document.createElement('script');
+  refTaggerScript.src = '//api.reftagger.com/v2/RefTagger.js';
+
+  // append <script>
+  var firstScript = document.getElementsByTagName('script')[0];
+  firstScript.parentNode.insertBefore(refTaggerScript, firstScript);
+
+  // call refTagger.tag() whenever references are added to page
+}
+initReftagger()
