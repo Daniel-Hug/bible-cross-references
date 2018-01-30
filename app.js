@@ -81,14 +81,14 @@ var searchEngine = (function() {
 			// reference. The rest are cross references with their
 			// reference and vote count separated by a space character
 			var commaSeparatedValues = line.split(',');
-			var originReference = commaSeparatedValues[0];
+			var originReference = unobfuscateOsis(commaSeparatedValues[0]);
 			commaSeparatedValues.shift();
 			crossReferencesByOriginReference[originReference] =
 				commaSeparatedValues.map(function(crossReference) {
 					// split on each space
 					var spaceSeparatedValues = crossReference.split(' ');
 					return {
-						targetPassage: spaceSeparatedValues[0],
+						targetPassage: unobfuscateOsisRange(spaceSeparatedValues[0]),
 						votes: parseInt(spaceSeparatedValues[1], 10)
 					};
 				});
@@ -264,6 +264,11 @@ function minifyCrossReferenceFile() {
 	var crossReferenceFile = 'cross_references.txt';
 	fetch(crossReferenceFile).then(response => response.text())
 	.then(minifyCrossReferences)
+	.then(obfuscateCrossReferences)
+	.then(function(text) {
+		window.crMin = text;
+		console.log('Cross references minified. Copy with copy(crMin)');
+	})
 	.catch(function(error) {
 	    console.error('Error fetching ' + crossReferenceFile + ':', error);
 	});
@@ -286,8 +291,43 @@ function minifyCrossReferenceFile() {
 			newLines[newLines.length - 1] += ',' + targetPassage + ' ' + voteCount;
 		});
 
-		window.crMin = newLines.join('\n');
-		console.log('Cross references minified. Copy with copy(crMin)');
+		return newLines.join('\n');
 	}
 }
 console.log('Get new minified file with minifyCrossReferenceFile()');
+
+var obfuscateCrossReferences = (function() {
+	var indexByBook = {"Gen":0,"Exod":1,"Lev":2,"Num":3,"Deut":4,"Josh":5,"Judg":6,"Ruth":7,"1Sam":8,"2Sam":9,"1Kgs":10,"2Kgs":11,"1Chr":12,"2Chr":13,"Ezra":14,"Neh":15,"Esth":16,"Job":17,"Ps":18,"Prov":19,"Eccl":20,"Song":21,"Isa":22,"Jer":23,"Lam":24,"Ezek":25,"Dan":26,"Hos":27,"Joel":28,"Amos":29,"Obad":30,"Jonah":31,"Mic":32,"Nah":33,"Hab":34,"Zeph":35,"Hag":36,"Zech":37,"Mal":38,"Matt":39,"Mark":40,"Luke":41,"John":42,"Acts":43,"Rom":44,"1Cor":45,"2Cor":46,"Gal":47,"Eph":48,"Phil":49,"Col":50,"1Thess":51,"2Thess":52,"1Tim":53,"2Tim":54,"Titus":55,"Phlm":56,"Heb":57,"Jas":58,"1Pet":59,"2Pet":60,"1John":61,"2John":62,"3John":63,"Jude":64,"Rev":65}
+
+	return function obfuscateCrossReferences(src) {
+		return src.replace(/\d?[a-zA-Z]+/g, function(match) {
+			return indexByBook[match];
+		});
+	};
+})();
+
+var unobfuscateOsis = (function() {
+	var osisBookAbbreviations = [
+		'Gen','Exod','Lev','Num','Deut',
+		'Josh','Judg','Ruth','1Sam','2Sam','1Kgs','2Kgs','1Chr','2Chr','Ezra','Neh','Esth',
+		'Job','Ps','Prov','Eccl','Song',
+		'Isa','Jer','Lam','Ezek',
+		'Dan','Hos','Joel','Amos','Obad','Jonah','Mic','Nah','Hab','Zeph','Hag','Zech','Mal',
+		'Matt','Mark','Luke','John',
+		'Acts','Rom','1Cor','2Cor',
+		'Gal','Eph','Phil','Col',
+		'1Thess','2Thess','1Tim','2Tim','Titus','Phlm',
+		'Heb','Jas','1Pet','2Pet','1John','2John','3John','Jude',
+		'Rev'
+	];
+
+	return function unobfuscateOsis(osis) {
+		var indexOfFirstPeriod = osis.indexOf('.');
+		var book = osisBookAbbreviations[osis.slice(0, indexOfFirstPeriod)];
+		return book + osis.slice(indexOfFirstPeriod);
+	};
+})();
+
+function unobfuscateOsisRange(osis) {
+	return osis.split('-').map(unobfuscateOsis).join('-');
+}
