@@ -3,13 +3,24 @@ body {
 	line-height: 24px;
 }
 
+h1, #reference-search-form, #footer {
+	margin-left: 40px;
+}
+
 h1 {
 	line-height: 1.1em;
+}
+
+#reference-search-form, #cross-references, #footer {
+	margin-top: 1.34em;
+	margin-bottom: 1.34em;
 }
 
 #reference-search-form {
 	overflow: hidden;
 	padding-left: 1px;
+	margin-top: 1.34em;
+	margin-bottom: 1.34em;
 }
 
 #reference-search-form input[type=search],

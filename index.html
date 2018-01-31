@@ -1,18 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Adavanced Bible cross reference search</title>
+	<meta charset="utf-8">
+	<title>Bible cross references: adavanced search</title>
+	<meta name="description" content="Search for similar Bible verses: see sciptures recommended by others!">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<h1>Find cross-references shared by a set of bible verses</h1>
 	<form id="reference-search-form">
-		<input type="search" name="references">
+		<input type="search" name="references" placeholder="Enter reference(s)">
 		<button type="submit">Find related verses</button>
 	</form>
 	<ol id="cross-references"></ol>
-	<p>The purpose of this tool is to facilitate your discovery of cross-references that share a common theme with Bible verses you already know. The cross reference data is from <a href="http://www.openbible.info/labs/cross-references/">OpenBible.info</a>.</p>
+	<p id="footer">The purpose of this tool is to facilitate your discovery of cross-references that share a common theme with Bible verses you already know. The cross reference data is from <a href="http://www.openbible.info/labs/cross-references/">OpenBible.info</a>.</p>
 
 	<script src="helpers.js"></script>
 	<script src="resources/bible-passage-reference-parser/js/en_bcv_parser.js"></script>
