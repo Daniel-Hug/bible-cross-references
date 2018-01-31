@@ -5,6 +5,7 @@ button {
 body {
 	font-family: sans-serif;
 	line-height: 24px;
+	max-width: 850px;
 }
 
 h1, #reference-search-form, #footer {
