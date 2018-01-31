@@ -11,6 +11,12 @@ on(referenceSearchForm, 'submit', instead(function() {
 	searchEngine.query(referencesStr);
 }));
 
+[].slice.call(qsa('#query-suggestions button')).forEach(function(button) {
+	on(button, 'click', function() {
+		referenceSearchForm.references.value = this.textContent;
+	});
+});
+
 
 
 
@@ -26,7 +32,7 @@ var searchEngine = (function() {
 	fetch(crossReferenceFile).then(response => response.text())
 	.then(processCrossReferenceFile)
 	.catch(function(error) {
-	    console.error('Error fetching cross reference data:', error);
+		console.error('Error fetching cross reference data:', error);
 	});
 
 	var processQuery = (function() {
@@ -240,22 +246,23 @@ var condenseWithRanges = (function() {
 
 // Reftagger
 function initReftagger() {
-  // config
-  window.refTagger = {
-      settings: {
-          noSearchClassNames: ['editor-content', 'navbar']
-      }
-  };
+	// config
+	window.refTagger = {
+		settings: {
+			noSearchClassNames: ['editor-content', 'navbar'],
+			noSearchTagNames: ["h1","h2","button"]
+		}
+	};
 
-  // create <script>
-  var refTaggerScript = document.createElement('script');
-  refTaggerScript.src = '//api.reftagger.com/v2/RefTagger.js';
+	// create <script>
+	var refTaggerScript = document.createElement('script');
+	refTaggerScript.src = '//api.reftagger.com/v2/RefTagger.js';
 
-  // append <script>
-  var firstScript = document.getElementsByTagName('script')[0];
-  firstScript.parentNode.insertBefore(refTaggerScript, firstScript);
+	// append <script>
+	var firstScript = document.getElementsByTagName('script')[0];
+	firstScript.parentNode.insertBefore(refTaggerScript, firstScript);
 
-  // call refTagger.tag() whenever references are added to page
+	// call refTagger.tag() whenever references are added to page
 }
 initReftagger()
 
@@ -270,7 +277,7 @@ function minifyCrossReferenceFile() {
 		console.log('Cross references minified. Copy with copy(crMin)');
 	})
 	.catch(function(error) {
-	    console.error('Error fetching ' + crossReferenceFile + ':', error);
+		console.error('Error fetching ' + crossReferenceFile + ':', error);
 	});
 
 	function minifyCrossReferences(text) {
