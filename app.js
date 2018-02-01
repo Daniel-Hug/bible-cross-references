@@ -250,7 +250,8 @@ function initReftagger() {
 	window.refTagger = {
 		settings: {
 			noSearchClassNames: ['editor-content', 'navbar'],
-			noSearchTagNames: ["h1","h2","button"]
+			noSearchTagNames: ["h1","h2","button"],
+			bibleVersion: "NASB"
 		}
 	};
 
