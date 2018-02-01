@@ -135,9 +135,15 @@ function displayResults(crossReferenceDataByTarget) {
 			return {
 				el: 'li',
 				kids: [
-					{ el: 'strong', text: osisToEn("esv-long", crossReference.reference) + ':' },
-					' ' + vb.count(crossReference.referenceCount, 'reference') + ', ' +
-					Math.round(crossReference.popularity * 100) + '% as popular as average'
+					{ el: 'span', kids: [
+						{ el: 'span', _className: 'reference-count',
+						'data-reference-count': crossReference.referenceCount,
+						text: '# references: ' + crossReference.referenceCount }, ' '
+					]},
+					{ el: 'span', kids: [
+						{ el: 'strong', text: osisToEn("esv-long", crossReference.reference) }, ', '
+					]},
+					{ el: 'span', text: Math.round(crossReference.popularity * 100) + '% as popular as average' }
 				]
 			};
 		})

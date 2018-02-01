@@ -58,15 +58,61 @@ h1 {
 	border-color: hsl(0, 0%, 58%);
 }
 
+#cross-references {
+	list-style: none;
+}
+
+#cross-references .reference-count {
+	display: inline-block;
+	padding: 0 8px;
+	font-size: 12px;
+	line-height: 18px;
+	border-radius: 100px;
+}
+
+#cross-references [data-reference-count="1"]  {background: hsl( 60, 80%, 81%);}
+#cross-references [data-reference-count="2"]  {background: hsl(197, 80%, 81%);}
+#cross-references [data-reference-count="3"]  {background: hsl(335, 80%, 81%);}
+#cross-references [data-reference-count="4"]  {background: hsl(113, 80%, 81%);}
+#cross-references [data-reference-count="5"]  {background: hsl(250, 80%, 81%);}
+#cross-references [data-reference-count="6"]  {background: hsl( 28, 80%, 81%);}
+#cross-references [data-reference-count="7"]  {background: hsl(165, 80%, 81%);}
+#cross-references [data-reference-count="8"]  {background: hsl(303, 80%, 81%);}
+#cross-references [data-reference-count="9"]  {background: hsl( 80, 80%, 81%);}
+#cross-references [data-reference-count="10"] {background: hsl(218, 80%, 81%);}
+#cross-references [data-reference-count="11"] {background: hsl(355, 80%, 81%);}
+#cross-references [data-reference-count="12"] {background: hsl(133, 80%, 81%);}
+#cross-references [data-reference-count="13"] {background: hsl(270, 80%, 81%);}
+#cross-references [data-reference-count="14"] {background: hsl( 48, 80%, 81%);}
+#cross-references [data-reference-count="15"] {background: hsl(185, 80%, 81%);}
+#cross-references [data-reference-count="16"] {background: hsl(323, 80%, 81%);}
+#cross-references [data-reference-count="17"] {background: hsl(100, 80%, 81%);}
+#cross-references [data-reference-count="18"] {background: hsl(238, 80%, 81%);}
+#cross-references [data-reference-count="19"] {background: hsl( 15, 80%, 81%);}
+#cross-references [data-reference-count="20"] {background: hsl(153, 80%, 81%);}
+#cross-references [data-reference-count="21"] {background: hsl(290, 80%, 81%);}
+#cross-references [data-reference-count="22"] {background: hsl( 68, 80%, 81%);}
+#cross-references [data-reference-count="23"] {background: hsl(205, 80%, 81%);}
+#cross-references [data-reference-count="24"] {background: hsl(343, 80%, 81%);}
+
 @media (max-width: 600px) {
 	#cross-references {
 		padding-left: 0;
-		list-style-position: inside;
+		list-style: none;
 	}
 }
 
 @media (min-width: 601px) {
 	h1, #reference-search-form, #footer {
 		margin-left: 40px;
+	}
+
+	#cross-references > li > span {
+		display: inline-block;
+		margin-left: 12px;
+	}
+
+	#cross-references > li > span:first-child {
+		margin-left: 0;
 	}
 }
