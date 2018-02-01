@@ -8,10 +8,6 @@ body {
 	max-width: 850px;
 }
 
-h1, #reference-search-form, #footer {
-	margin-left: 40px;
-}
-
 h1 {
 	line-height: 1.1em;
 }
@@ -60,4 +56,17 @@ h1 {
 #query-suggestions button:focus {
 	background: hsl(0, 0%, 81%);
 	border-color: hsl(0, 0%, 58%);
+}
+
+@media (max-width: 600px) {
+	#cross-references {
+		padding-left: 0;
+		list-style-position: inside;
+	}
+}
+
+@media (min-width: 601px) {
+	h1, #reference-search-form, #footer {
+		margin-left: 40px;
+	}
 }
