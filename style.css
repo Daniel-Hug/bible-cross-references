@@ -37,6 +37,19 @@ h1 {
 	border: 1px solid #888;
 }
 
+/* IE10+ */
+::-ms-clear {
+  display: none;
+}
+
+/* Chrome */
+::-webkit-search-decoration,
+::-webkit-search-cancel-button,
+::-webkit-search-results-button,
+::-webkit-search-results-decoration { 
+  display: none; 
+}
+
 #query-suggestions {
 	clear: both;
 	margin-left: -1px;
